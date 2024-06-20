@@ -18,16 +18,14 @@ require_once __TYPECHO_ROOT_DIR__ . '/var/Typecho/Common.php';
 \Typecho\Common::init();
 
 // config db
-$db = new \Typecho\Db($_ENV["TYPECHO_ADAPTER_NAME"], $_ENV["TYPECHO_PREFIX"]);
+$db = new Typecho_Db('Pdo_Mysql', 'typecho_');
 $db->addServer(array (
-    'host' => $_ENV["TYPECHO_HOST"],
-    'port' => $_ENV["TYPECHO_PORT"],
-    'user' => $_ENV["TYPECHO_USERNAME"],
-    'password' => $_ENV["TYPECHO_PASSWORD"],
-    'charset' => $_ENV["TYPECHO_CHARSET"],
-    'database' => $_ENV["TYPECHO_NAME"],
-    'engine' => $_ENV["TYPECHO_ENGINE"],
-    'sslCa' => $_ENV["TYPECHO_SSL_CA"],
-    'sslVerify' => true,
-), \Typecho\Db::READ | \Typecho\Db::WRITE);
-\Typecho\Db::set($db);
+  'host' => $_ENV["TYPECHO_HOST"],
+  'user' => $_ENV["TYPECHO_USERNAME"],
+  'password' => $_ENV["TYPECHO_PASSWORD"],
+  'charset' => 'utf8mb4',
+  'port' => $_ENV["TYPECHO_PORT"],
+  'database' => $_ENV["TYPECHO_NAME"],
+  'engine' => 'MyISAM',
+), Typecho_Db::READ | Typecho_Db::WRITE);
+Typecho_Db::set($db);
